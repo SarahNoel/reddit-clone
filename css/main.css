@@ -1,0 +1,87 @@
+body{
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/e6/9f/4d/e69f4d0894f4d01d3f43d920afbd6e23.jpg');
+  font-family: 'Cabin', sans-serif;
+}
+
+
+.jumbotron{
+  border-radius: 10px;
+  width: 95%;
+  min-height: 250px;
+  margin: auto;
+  margin-bottom: 15px;
+  clear: both
+}
+
+.jumbotron p{
+  font-size: 12px;
+}
+
+img{
+    vertical-align: middle;
+    height: 200px;
+    width: 250px;
+    margin-left: 40px;
+}
+
+.img-wrapper{
+  width: 25%;
+  float: left;
+}
+
+.text-wrapper{
+  margin-top: -230px;
+  width: 73%;
+  float: right;
+  clear: left;
+}
+
+.red{
+  color: red;
+}
+
+.comment-form{
+  margin-bottom: 15px;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-left: 27%;
+
+}
+
+.show-comments{
+  background-color: #EEEEEE;
+  border-radius: 0 0 10px 10px;
+  clear: both;
+  margin-left: 27%;
+  margin-bottom: -30px
+}
+
+.green{
+  color: green;
+}
+
+.desc{
+  margin-right: 45px
+}
+
+.add-form{
+  margin-bottom: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 95%;
+  margin: auto;
+
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.comments{
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+
+

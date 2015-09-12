@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html ng-app="redditapp">
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit Places</title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/animations.css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+
+<div ng-controller="Places">
+
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand">Reddit Places</a>
+  </div>
+    <ul class="nav navbar-nav">
+      <li ng-click="show = !show"><a><span class = 'glyphicon glyphicon-plus'></span> Submit Post </a></li>
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input name='search' ng-model='search' type="text" class="form-control" placeholder="Search">
+      </div>
+    </form>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By Votes <span class="caret"></span></a>
+      </li>
+    </ul>
+</nav>
+
+<!--add place form -->
+<form name = "addPlaceForm" ng-model="addPlaceForm" ng-show='show' class='add-form'>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input name='title' ng-model='title' type="text" class="form-control"  placeholder="
+    Title" required>
+  </div>
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text" class="form-control" name='author' ng-model='author' placeholder="Author" required>
+  </div>
+   <div class="form-group">
+    <label for="image">Image URL</label>
+    <input type="text" class="form-control" name='image' ng-model='image' placeholder="https://cdn.tutsplus.com/vector/authors/sharon-milne/amanda_tut_yeti_final.jpg" required>
+  </div>
+   <div class="form-group">
+    <label for="author">Description</label>
+    <input type="text" class="form-control" name='description' ng-model='description' placeholder="Description" required>
+  </div>
+
+  <button ng-click="addNewPlace(); show=false"ng-disabled="addPlaceForm.$invalid" type="submit" class="btn btn-default">Submit Post</button>
+<br>
+<br>
+</form>
+<!--END add place form -->
+
+
+<!--repeat each place -->
+<div class = "jumbotron repeat-animation hide-fade" ng-repeat="place in places | orderBy:'-votes' | filter:search">
+<div class = "img-wrapper">
+<img src = {{place.image}} alt='place'>
+</div>
+<div class= "text-wrapper">
+<h3> {{place.title}} | <span ng-click='place.votes = place.votes + 1' class = "glyphicon glyphicon-arrow-up"></span>  <span ng-click='place.votes = place.votes - 1' class = "glyphicon glyphicon-arrow-down"></span> <span ng-class="{'red':place.votes < 0, 'green':place.votes > 0}"> {{place.votes}} </span></h3>
+<h5>{{place.author}}</h5>
+<p class="desc"> {{place.description}} </p>
+
+<br>
+
+<!-- date:'fullDate'-->
+ <h5> <span class= "glyphicon glyphicon-calendar"></span> <span>{{place.time | amCalendar }}</span>&nbsp; | &nbsp;<span ng-click="showComment = !showComment"> <span class= "glyphicon glyphicon-comment"></span> {{place.comments.length}}
+<ng-pluralize count = 'place.comments.length'
+    when="{'1': 'comment',
+          'other': 'comments'}">
+  </ng-pluralize></span>&nbsp; | &nbsp;
+  <span ng-click= 'showCommentForm = !showCommentForm' ><span class = "glyphicon glyphicon-pencil"></span> Add Comment </span> </h5>
+   </div>
+
+<!--show comments -->
+  <div class='show-comments'>
+  <div ng-show='showComment' ng-repeat='comment in place.comments'>
+  <h6 class='comments'><span class='bold'> {{comment.author}} </span> - {{comment.comment}} </h6>
+</div>
+</div>
+<!--END show comments -->
+
+<!--END each place -->
+
+<br>
+
+<!--add comment form -->
+  <form name= "addCommentForm" ng-model="addCommentForm" class='form-inline comment-form' ng-show="showCommentForm">
+
+    <div class="form-group">
+      <label for="newAuthor">Author</label>
+      <input type="text" class="form-control" name='newAuthor' ng-model='newAuthor' placeholder="username" required>
+
+    </div>
+     <div class="form-group">
+      <label for="newComment">Comment</label>
+      <input type="text" class="form-control" name='newComment' ng-model='newComment' placeholder="comment text" required>
+    </div>
+
+    <button ng-click="addNewComment(newAuthor, newComment, place.title); showCommentForm=false" ng-disabled="addCommentForm.$invalid" type='submit' class="btn btn-default">Add Comment</button>
+  </form>
+<!--END add comment form -->
+
+
+
+</div><!--end jumbotron repeat  -->
+</div> <!--end Places controller -->
+
+
+
+
+
+    <script type="text/javascript" src = 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js'></script>
+    <script type="text/javascript" src='js/animate.js'></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src='js/main.js'></script>
+  </body>
+</html>
