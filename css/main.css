@@ -92,6 +92,13 @@ img{
   font-weight: 400;
 }
 
+.sort-bar{
+  margin-top: 15px;
+  color: grey;
+}
 
-
+.sorty{
+  background-color: #EEEEEE;
+  border: none;
+}
 

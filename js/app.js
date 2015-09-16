@@ -1,8 +1,4 @@
-var app = angular.module('redditapp', ['ngAnimate', 'angularMoment']);
-
-app.run(function(amMoment) {
-    amMoment.changeLocale('de');
-});
+var app = angular.module('redditapp', ['ngAnimate', 'angularMoment', 'ui.bootstrap']);
 
 app.controller("Places", function($scope) {
   $scope.places =
@@ -60,24 +56,25 @@ app.controller("Places", function($scope) {
         time: Date.now(),
       };
     $scope.places.push(newPlace);
-    $scope.title = ('');
-    $scope.author = ('');
-    $scope.image = ('');
-    $scope.description = ('');
+    $scope.title = $scope.author = $scope.image = $scope.description = ('');
   };
- $scope.addNewComment = function(newAuthor, newComment, useTitle){
-  var index;
-  var brandNewComment=
-    {
-      author: newAuthor,
-      comment: newComment
-
-    };
-    for (var i = 0; i < $scope.places.length; i++) {
-      if ($scope.places[i].title === useTitle){
-        index = i;
-        $scope.places[i].comments.push(brandNewComment);
-      }
-    }
+   $scope.addNewComment = function(){
+    this.place.comments.push(
+      {
+        author:this.newAuthor,
+        comment:this.newComment
+    });
   };
 });
+
+
+
+
+
+
+
+
+
+
+
+
