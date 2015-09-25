@@ -59,6 +59,7 @@ app.controller("Places", function($scope) {
     $scope.title = $scope.author = $scope.image = $scope.description = ('');
   };
    $scope.addNewComment = function(){
+    console.log(this);
     this.place.comments.push(
       {
         author:this.newAuthor,
